@@ -10,6 +10,7 @@ public class SpeedEffect : MonoBehaviour
     private ParticleSystem.EmissionModule emissionModule;
     public Rigidbody rigid;
     public AnimationCurve rateCurve;
+    public AnimationCurve lifetimeCurve;
 
     void Awake()
     {
@@ -22,6 +23,6 @@ public class SpeedEffect : MonoBehaviour
     {
         float var = Mathf.Max(rateCurve.Evaluate(Mathf.Clamp(rigid.velocity.magnitude * 0.001f, 0f, 1000f)) * 1000f - 0.1f, 0f);
         emissionModule.rateOverTime = var;
-        mainModule.startLifetime = Mathf.Clamp(var.LinearRemap(10f, 300f, 0f, 2f), 0f, 4f);
+        mainModule.startLifetime = lifetimeCurve.Evaluate(Mathf.Clamp(var.LinearRemap(10f, 300f, 0f, 1f), 0f, 1f));
     }
 }
