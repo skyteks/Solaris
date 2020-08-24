@@ -286,7 +286,7 @@ Transform:
   m_GameObject: {fileID: 317823630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -999999}
-  m_LocalScale: {x: 100000, y: 100000, z: 100000}
+  m_LocalScale: {x: 10000, y: 10000, z: 10000}
   m_Children:
   - {fileID: 510892220}
   - {fileID: 932273013}
@@ -616,6 +616,7 @@ Transform:
   m_Children:
   - {fileID: 271795464}
   - {fileID: 1680090345}
+  - {fileID: 1550731577}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -637,6 +638,37 @@ MonoBehaviour:
   lookRotateSpeed: 90
   rollSpeed: 90
   rollAcceleration: 3.5
+--- !u!1 &859370659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 859370660}
+  m_Layer: 0
+  m_Name: Offset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &859370660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859370659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 963194228}
+  m_Father: {fileID: 1680090345}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &932273012
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +793,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -123.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1680090345}
+  m_Father: {fileID: 859370660}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
@@ -794,8 +826,9 @@ GameObject:
   - component: {fileID: 1550731577}
   - component: {fileID: 1550731576}
   - component: {fileID: 1550731575}
+  - component: {fileID: 1550731578}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Speed Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1435,7 +1468,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 1000000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -5592,9 +5625,73 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1743767655}
-  m_RootOrder: 0
+  m_Father: {fileID: 838542665}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &1550731578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550731574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6240dbb54a1a424d9dd6af5e9361880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 838542664}
+  rateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.00042015314
+      value: 0.000012272969
+      inSlope: -0.017070822
+      outSlope: -0.017070822
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22781223
+    - serializedVersion: 3
+      time: 0.33540213
+      value: 0.18532959
+      inSlope: 0.99106383
+      outSlope: 0.99106383
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.44018286
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5053
+      value: 0.7827857
+      inSlope: 1.1390734
+      outSlope: 1.1390734
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18743283
+      outWeight: 0.35997647
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.34139186
+      outSlope: 0.34139186
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.096843295
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10.850087
+      value: 4.6217175
+      inSlope: 0.4598395
+      outSlope: 0.34106606
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.060806073
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1650098904 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 454826032084446261, guid: f00c8df389af47046baea2d14b531550, type: 3}
@@ -5641,7 +5738,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 963194228}
+  - {fileID: 859370660}
   m_Father: {fileID: 838542665}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5688,53 +5785,6 @@ Halo:
     serializedVersion: 2
     rgba: 4278201599
   m_Size: 75307
---- !u!1 &1743767653
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1743767655}
-  - component: {fileID: 1743767654}
-  m_Layer: 0
-  m_Name: Speed Effect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1743767654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743767653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b83a86d3b1a4f14991fff189656f97c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateState: 0
-  followTransform: {fileID: 838542665}
-  linkRotation: 0
---- !u!4 &1743767655
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743767653}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1550731577}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1884586820
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class CameraOrbit : MonoBehaviour
             cameraLocked = true;
         }
         //Cursor.visible = cameraLocked;
-        Cursor.lockState = cameraLocked ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.lockState = cameraLocked ? CursorLockMode.Confined : CursorLockMode.Locked;
     }
 
 
