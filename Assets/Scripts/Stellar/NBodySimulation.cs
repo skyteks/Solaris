@@ -5,12 +5,17 @@ using UnityEngine;
 public class NBodySimulation : MonoBehaviour
 {
     private CelestialBody[] bodies;
+    [Range(0f, 70f)]
     public float timeScale = 1f;
 
-    private void Awake()
+    void Awake()
     {
         bodies = FindObjectsOfType<CelestialBody>();
         Time.fixedDeltaTime = Universe.physicsTimeStep;
+    }
+
+    void OnValidate()
+    {
         Time.timeScale = timeScale;
     }
 

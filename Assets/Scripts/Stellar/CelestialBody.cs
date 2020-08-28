@@ -49,9 +49,10 @@ public class CelestialBody : MonoBehaviour, IGravitationalBody
         meshHolder = transform.GetChild(0);
         meshHolder.localPosition = Vector3.zero;
         meshHolder.localScale = Vector3.one * radius;
-        List<Material> mats = new List<Material>();
-        meshHolder.GetComponent<MeshRenderer>().GetMaterials(mats);
-        mats[0].color = mainColor;
+        MeshRenderer renderer = meshHolder.GetComponent<MeshRenderer>();
+        Material newMat = Instantiate(renderer.sharedMaterial);
+        newMat.color = mainColor;
+        renderer.material = newMat;
     }
 
     public void UpdateVelocity(CelestialBody[] celestialBodies, float timeStep)
