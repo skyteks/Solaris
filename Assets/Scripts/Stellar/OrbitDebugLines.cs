@@ -32,8 +32,7 @@ public class OrbitDebugLines : MonoBehaviour
     public bool useRelativeObject;
     public CelestialBody relativeObject;
     private VirtualBody relativeVirtual;
-    [SerializeField]
-    private Mesh sphereMesh;
+    public Mesh sphereMesh;
 
     void OnDrawGizmos()
     {

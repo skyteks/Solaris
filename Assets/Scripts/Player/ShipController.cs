@@ -14,6 +14,9 @@ public class ShipController : MonoBehaviour
     public float rollSpeed = 90f, rollAcceleration = 3.5f;
     private float rollInput;
 
+    public float drag = 1f;
+    private bool dampener = true;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -26,6 +29,12 @@ public class ShipController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            dampener = !dampener;
+        }
+        rigid.drag = dampener ? drag : 0f;
+
         lookInput.x = Input.mousePosition.x;
         lookInput.y = Input.mousePosition.y;
 

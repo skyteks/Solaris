@@ -23,6 +23,6 @@ public class SpeedEffect : MonoBehaviour
     {
         float var = Mathf.Max(rateCurve.Evaluate(Mathf.Clamp(rigid.velocity.magnitude * 0.001f, 0f, 1000f)) * 1000f - 0.1f, 0f);
         emissionModule.rateOverTime = var;
-        mainModule.startLifetime = lifetimeCurve.Evaluate(Mathf.Clamp(var.LinearRemap(10f, 300f, 0f, 1f), 0f, 1f));
+        mainModule.startLifetime = lifetimeCurve.Evaluate(Mathf.Clamp(var.LinearRemap(10f, 200f, 0f, 1f), 0f, 1f));
     }
 }
