@@ -57,33 +57,23 @@ public class CelestialBody : MonoBehaviour, IGravitationalBody
 
     public void UpdateVelocity(CelestialBody[] celestialBodies, float timeStep)
     {
-        velocity = CalculateVelocity(this, celestialBodies, timeStep);
+        Vector3 newVelocity = Vector3.zero;
+        foreach (var otherBody in celestialBodies)
+        {
+            if (otherBody as Object != this)
+            {
+                float sqrDst = (otherBody.position - position).sqrMagnitude;
+                Vector3 forceDir = (otherBody.position - position).normalized;
+                Vector3 force = forceDir * Universe.gravitationalConstant * mass * otherBody.mass / sqrDst;
+                Vector3 acceleration = force / mass;
+                newVelocity += acceleration * timeStep;
+            }
+        }
+        velocity += newVelocity;
     }
 
     public void UpdatePosition(float timeStep)
     {
-        rigid.position = CalculatePosition(this, timeStep);
-    }
-
-    public static Vector3 CalculateVelocity(IGravitationalBody body, IGravitationalBody[] celestialBodies, float timeStep)
-    {
-        Vector3 velocity = body.velocity;
-        foreach (var otherBody in celestialBodies)
-        {
-            if (otherBody != body)
-            {
-                float sqrDst = (otherBody.position - body.position).sqrMagnitude;
-                Vector3 forceDir = (otherBody.position - body.position).normalized;
-                Vector3 force = forceDir * Universe.gravitationalConstant * body.mass * otherBody.mass / sqrDst;
-                Vector3 acceleration = force / body.mass;
-                velocity += acceleration * timeStep;
-            }
-        }
-        return velocity;
-    }
-
-    public static Vector3 CalculatePosition(IGravitationalBody body, float timeStep)
-    {
-        return body.position + body.velocity * timeStep;
+        position += velocity * timeStep;
     }
 }
