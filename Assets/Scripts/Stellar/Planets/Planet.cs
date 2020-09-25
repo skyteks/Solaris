@@ -28,13 +28,13 @@ public class Planet : MonoBehaviour
         }
         terrainFaces = new TerrainFace[6];
 
-        Vector3[] directions = new Vector3[] { Vector3.right, Vector3.up, Vector3.forward, Vector3.left, Vector3.down, Vector3.back };
+        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };//new Vector3[] { Vector3.right, Vector3.up, Vector3.forward, Vector3.left, Vector3.down, Vector3.back };
 
         for (int i = 0; i < 6; i++)
         {
             if (meshFilters[i] == null)
             {
-                GameObject meshHolder = new GameObject("mesh" + i);
+                GameObject meshHolder = new GameObject("mesh " + i);
                 meshHolder.transform.SetParent(transform);
 
                 meshHolder.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));

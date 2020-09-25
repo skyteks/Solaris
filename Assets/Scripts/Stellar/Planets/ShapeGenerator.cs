@@ -17,12 +17,12 @@ public class ShapeGenerator
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere)
     {
-        float firstLayerValue = 0;
-        float elevation = 0;
+        float firstLayerValue = 0f;
+        float elevation = 0f;
 
         if (noiseFilters.Length > 0)
         {
-            firstLayerValue = noiseFilters[1].Evaluate(pointOnUnitSphere);
+            firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
             if (settings.noiseLayers[0].enabled)
             {
                 elevation = firstLayerValue;
@@ -34,7 +34,7 @@ public class ShapeGenerator
             if (settings.noiseLayers[i].enabled)
             {
                 float mask = settings.noiseLayers[i].useFirstLayerAsMask ? firstLayerValue : 1f;
-                elevation = noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
+                elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }
         }
         return pointOnUnitSphere * settings.radius * (1f + elevation);

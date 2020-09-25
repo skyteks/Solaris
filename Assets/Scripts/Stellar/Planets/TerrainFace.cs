@@ -17,7 +17,7 @@ public class TerrainFace
 
         axisA = new Vector3(localUp.y, localUp.z, localUp.x);
         axisB = Vector3.Cross(localUp, axisA);
-        axisA = -Vector3.Cross(localUp, axisB);
+        //axisA = -Vector3.Cross(localUp, axisB);
     }
 
     public void ConstructMesh()
