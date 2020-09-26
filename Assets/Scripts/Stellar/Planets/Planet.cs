@@ -12,7 +12,9 @@ public class Planet : MonoBehaviour
     public bool shapeSettingsFoldout;
     [HideInInspector]
     public bool colorSettingsFoldout;
-    private ShapeGenerator shapeGenerator;
+
+    private ShapeGenerator shapeGenerator = new ShapeGenerator();
+    private ColorGenerator colorGenerator = new ColorGenerator();
 
     [SerializeField, HideInInspector]
     private MeshFilter[] meshFilters;
@@ -20,7 +22,8 @@ public class Planet : MonoBehaviour
 
     private void Initialize()
     {
-        shapeGenerator = new ShapeGenerator(shapeSettings);
+        shapeGenerator.UpdateSettings(shapeSettings);
+        colorGenerator.UpdateSettings(colorSettings);
 
         if (meshFilters == null || meshFilters.Length == 0)
         {
@@ -28,7 +31,7 @@ public class Planet : MonoBehaviour
         }
         terrainFaces = new TerrainFace[6];
 
-        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };//new Vector3[] { Vector3.right, Vector3.up, Vector3.forward, Vector3.left, Vector3.down, Vector3.back };
+        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
 
         for (int i = 0; i < 6; i++)
         {
@@ -37,10 +40,11 @@ public class Planet : MonoBehaviour
                 GameObject meshHolder = new GameObject("mesh " + i);
                 meshHolder.transform.SetParent(transform);
 
-                meshHolder.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
+                meshHolder.AddComponent<MeshRenderer>();
                 meshFilters[i] = meshHolder.AddComponent<MeshFilter>();
                 meshFilters[i].sharedMesh = new Mesh();
             }
+            meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.material;
 
             terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
         }
@@ -59,13 +63,17 @@ public class Planet : MonoBehaviour
         {
             face.ConstructMesh();
         }
+
+        colorGenerator.UpdateElevation(shapeGenerator.elevationMinMax);
     }
 
     private void GenerateColors()
     {
-        foreach (MeshFilter filter in meshFilters)
+        colorGenerator.UpdateColors();
+
+        foreach (TerrainFace face in terrainFaces)
         {
-            filter.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.color;
+            face.UpdateUVs(colorGenerator);
         }
     }
 
