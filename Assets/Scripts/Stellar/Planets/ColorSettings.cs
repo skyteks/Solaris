@@ -6,7 +6,7 @@ using UnityEngine;
 public class ColorSettings : ScriptableObject
 {
     [System.Serializable]
-    public class BiomeColorSettings
+    public struct BiomeColorSettings
     {
         [System.Serializable]
         public class Biome
@@ -29,4 +29,5 @@ public class ColorSettings : ScriptableObject
 
     public Material material;
     public BiomeColorSettings biomeColorSettings;
+    public Gradient oceonColor;
 }

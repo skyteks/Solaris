@@ -31,7 +31,7 @@ public class RigidNoiseFilter : INoiseFilter
             amplitude *= settings.persistance;
         }
 
-        noiseValue = Mathf.Max(0f, noiseValue - settings.minValue);
+        noiseValue = noiseValue - settings.minValue;
         return noiseValue * settings.strenght;
     }
 }

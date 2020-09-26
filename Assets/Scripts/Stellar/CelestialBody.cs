@@ -33,7 +33,6 @@ public class CelestialBody : MonoBehaviour, IGravitationalBody
     private Color color = Color.white;
 
     private Rigidbody rigid;
-    private Transform meshHolder;
 
     void Awake()
     {
@@ -46,19 +45,17 @@ public class CelestialBody : MonoBehaviour, IGravitationalBody
     void OnValidate()
     {
         mass = surfaceGravity * radius * radius / Universe.gravitationalConstant;
-        meshHolder = transform.GetChild(0);
-        meshHolder.localPosition = Vector3.zero;
-        meshHolder.localScale = Vector3.one * radius;
-        MeshRenderer renderer = meshHolder.GetComponent<MeshRenderer>();
-        Material newMat = Instantiate(renderer.sharedMaterial);
-        newMat.color = mainColor;
-        renderer.material = newMat;
+        Planet planet = transform.GetComponent<Planet>();
+        if (planet != null)
+        {
+            planet.shapeSettings.radius = radius;
+        }
     }
 
     public void UpdateVelocity(CelestialBody[] celestialBodies, float timeStep)
     {
         Vector3 newVelocity = Vector3.zero;
-        foreach (var otherBody in celestialBodies)
+        foreach (CelestialBody otherBody in celestialBodies)
         {
             if (otherBody as Object != this)
             {

@@ -6,13 +6,13 @@ using UnityEngine;
 public class ShapeSettings : ScriptableObject
 {
     [System.Serializable]
-    public class NoiseLayer
+    public struct NoiseLayer
     {
-        public bool enabled = true;
+        public bool enabled;
         public bool useFirstLayerAsMask;
         public NoiseSettings noiseSettings;
     }
 
     public float radius = 1f;
-    public NoiseLayer[] noiseLayers;
+    public NoiseLayer[] noiseLayers = new NoiseLayer[0];
 }

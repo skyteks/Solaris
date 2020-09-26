@@ -20,6 +20,32 @@ public class Planet : MonoBehaviour
     private MeshFilter[] meshFilters;
     private TerrainFace[] terrainFaces;
 
+    void Start()
+    {
+        GeneratePlanet();
+    }
+
+    void OnValidate()
+    {
+        if (!Application.isPlaying)
+        {
+            GeneratePlanet();
+        }
+    }
+
+    public void GeneratePlanet()
+    {
+        if (shapeSettings == null || colorSettings == null)
+        {
+            Debug.LogError("No settings for planet generation added");
+            return;
+        }
+        Initialize();
+        GenerateMesh();
+        GenerateColors();
+    }
+
+
     private void Initialize()
     {
         shapeGenerator.UpdateSettings(shapeSettings);
@@ -38,6 +64,7 @@ public class Planet : MonoBehaviour
             if (meshFilters[i] == null)
             {
                 GameObject meshHolder = new GameObject("mesh " + i);
+                meshHolder.transform.SetPositionAndRotation(transform.position, transform.rotation);
                 meshHolder.transform.SetParent(transform);
 
                 meshHolder.AddComponent<MeshRenderer>();
@@ -48,13 +75,6 @@ public class Planet : MonoBehaviour
 
             terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
         }
-    }
-
-    public void GeneratePlanet()
-    {
-        Initialize();
-        GenerateMesh();
-        GenerateColors();
     }
 
     private void GenerateMesh()
