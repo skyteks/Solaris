@@ -1,4 +1,4 @@
-# Tin-Can
+# Solaris
 
 A Solar System simulation / space fighter simulation
 
